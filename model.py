@@ -7,6 +7,7 @@ import requests
 app = Flask(__name__)
 api = Api(app)
 import os
+from dotenv import load_dotenv
 
 
 # Fungsi untuk memproses data JSON
@@ -421,7 +422,10 @@ def get_solution():
     return jsonify(solution)
 
 
+# Load variabel dari file .env
+load_dotenv()  #
+
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 8080))
+
+    port = int(os.getenv('PORT', 3000))  
     app.run(host='0.0.0.0', port=port, debug=True)
