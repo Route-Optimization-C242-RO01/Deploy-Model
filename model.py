@@ -9,14 +9,13 @@ api = Api(app)
 import os
 from dotenv import load_dotenv
 
-
 # Fungsi untuk memproses data JSON
 def Convert_Json(data_json): 
     Nama_Jalan = [item.get('Street', '') for item in data_json['data']]
     Kota = [item.get('City', '') for item in data_json['data']]
     Provinsi = [item.get('Province', '') for item in data_json['data']]
     Kapasitas = [int(item.get('Kg', 0)) for item in data_json['data']]
-    Kode_Pos = [item.get('Postal_code', '') for item in data_json['data']]
+    Kode_Pos = [item.get('Postal_Code', '') for item in data_json['data']]
     Banyak_Kendaraan  = data_json['Number_of_vehicles']
 
     Addresses = [f"{a},{b},{c}" for a, b, c in zip(Nama_Jalan, Kota, Provinsi)]
@@ -382,7 +381,7 @@ def get_solution():
         data = {}
         data['distance_matrix'] = matrix
         data['demands'] = Kapasitas
-        data["vehicle_capacities"] = 10  # Ini disesuaikan
+        data["vehicle_capacities"] = 500  # Ini disesuaikan
         data["num_vehicles"] = Banyak_Kendaraan
         data["depot"] = 0
         return data
@@ -407,8 +406,7 @@ def get_solution():
                     "street": Nama_Jalan[pelanggan],
                     "city": Kota[pelanggan], 
                     "province": Provinsi[pelanggan],
-                    "postal_code" :Kode_Pos[pelanggan],
-                    "kg": Kapasitas[pelanggan]
+                    "postal_code" :Kode_Pos[pelanggan]
                 }
             Rute.append(Location_Data)
         Hasil[f"Kendaraan{Kendaraan}"] = Rute
