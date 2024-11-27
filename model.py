@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 app = Flask(__name__)
 api = Api(app)
-
+# revisi
 
 
 
