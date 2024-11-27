@@ -452,6 +452,8 @@ def get_solution():
     # Mengembalikan solusi dalam format JSON
     return jsonify(solution)
 
+# Load variabel dari file .env
+load_dotenv()  #
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
