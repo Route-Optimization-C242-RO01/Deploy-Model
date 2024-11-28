@@ -14,16 +14,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SERVICE_KEY }}
-
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          install_components: gcloud
+          project_id: capstone-ro1
+          service_account_key: ${{ secrets.GCP_SERVICE_KEY }}
+
+      - name: Export Service Account Key
+        run: echo "${{ secrets.GCP_SERVICE_KEY }}" > key.json
+
+      - name: Authenticate with Service Account
+        run: gcloud auth activate-service-account --key-file=key.json
 
       - name: Deploy to Cloud Run
         run: |
