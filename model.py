@@ -18,7 +18,7 @@ def Convert_Json(data_json):
     Kota = [item.get('City', '') for item in data_json['data']]
     Provinsi = [item.get('Province', '') for item in data_json['data']]
     Kapasitas = [int(item.get('Kg', 0)) for item in data_json['data']]
-    Kode_Pos = [item.get('Postal_Code', '') for item in data_json['data']]
+    Kode_Pos = [item.get('Postal_code', '') for item in data_json['data']]
     Banyak_Kendaraan = data_json['Number_of_vehicles']
     Kapasitas[0] = 0
     Addresses = [f"{a},{b},{c}" for a, b, c in zip(Nama_Jalan, Kota, Provinsi)]
@@ -324,7 +324,7 @@ def cetak_hasil(routes, data, all_birds_distances):
 
 
 # Fungsi Utama: VRP Cuckoo Search
-def vrp_cuckoo_search(data, birds=10, iterations=100, alpha_value=0.01, lambda_value=1.5, discovery_rate=0.25):
+def vrp_cuckoo_search(data, birds=40, iterations=3000, alpha_value=0.01, lambda_value=1.5, discovery_rate=0.25):
     banyak_pelanggan = len(data['demands']) - 1
     birds_population = membangkitkan_populasi_awal(birds, banyak_pelanggan)
     permutasi_birds = mengurutkan_bilangan_permutasi(birds_population, birds, banyak_pelanggan)
@@ -402,7 +402,7 @@ def get_solution():
 
     # Optimalisasi VRP dengan Cuckoo Search
     best_solution, best_distance, final_routes = vrp_cuckoo_search(
-        data, birds=10, iterations=100, alpha_value=0.01, lambda_value=1.5, discovery_rate=0.25
+        data, birds=40, iterations=3000, alpha_value=0.01, lambda_value=1.5, discovery_rate=0.25
     )
 
     # Mengonversi solusi ke format JSON yang bisa dikembalikan
